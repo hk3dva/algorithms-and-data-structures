@@ -1,0 +1,8 @@
+﻿  TopSort.cpp
+D:\alg\TopSort\TopSort\TopSort.cpp(126,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  1 of 439 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  TopSort.vcxproj -> D:\alg\TopSort\x64\Release\TopSort.exe

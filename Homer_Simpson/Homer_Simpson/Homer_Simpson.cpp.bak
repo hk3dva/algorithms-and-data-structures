@@ -1,0 +1,115 @@
+﻿#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool FileCor(std::ifstream& inpFile, std::ofstream& outFile) //проверка дял фалов
+{
+    if (!inpFile.is_open())
+    {
+        std::cout << "Failed to open Input file \n";
+        return false;
+    }
+    if (inpFile.bad())
+    {
+        std::cout << "Failed to read data from input file \n";
+        return false;
+    }
+    if (!outFile.flush())
+    {
+        std::cout << "Failed to write data to output file\n";
+        return false;
+    }
+    if (!outFile.is_open())
+    {
+        std::cout << "Failed to open outputfile \n";
+        return false;
+    }
+    return true;
+}
+
+void AmountFinder(vector <int>& prises, int cost, int bal, vector <int>& amount)
+{
+    int min = *min_element(prises.begin(), prises.end());
+    int max = cost / min;
+    int maxAmount{};
+    for (int i = 0; i < max + 1; i++)
+        for (int j = 0; j < max + 1; j++)
+            for (int k = 0; k < max + 1; k++)
+                if (prises[0] * i + prises[1] * j + prises[2] * k <= cost)
+                {
+                    if (maxAmount <= i + j + k)
+                    {
+                        maxAmount = i + j + k;
+                        amount[0] = i;
+                        amount[1] = j;
+                        amount[2] = k;
+                    }
+                }
+    bal = cost - prises[0] * amount[0] + prises[1] * amount[1] + prises[2] * amount[2];
+}
+int main(int argc, char* argv[])
+{
+    if (argc != 3)
+    {
+        cout << "Неверное количество аргуметнов \n"
+            << "Чтобы использовать: Homer_Simpson.exe <Input file> <Output file>" << endl;
+        return 1;
+    }
+
+    ifstream inputFile;
+    inputFile.open(argv[1]);
+
+    std::ofstream outputFile;
+    outputFile.open(argv[2]);
+    if (!FileCor(inputFile, outputFile))
+    {
+        cout << endl;
+        return 1;
+    }
+    int cash{};
+    inputFile >> cash;
+    if (cash < 1 || cash > 2000000000)
+    {
+        cout << "N не входит в границы 1 <= N <= 2*10^9" << endl;
+        return 1;
+    }
+    vector <int> costs{};
+    vector <int> tempCosts{};
+    for (int i = 0; i < 3; i++)
+    {
+        int cost{};
+        inputFile >> cost;
+        if (cost < 1 || cost > 2000000000)
+        {
+            cout << cost << ": Число не входит в границы 1 <= C <= 2*10^9" << endl;
+            return 1;
+        }
+        costs.push_back(cost);
+    }
+
+    int balance{};
+    vector <int> amount{ 0,0,0 };
+    AmountFinder(costs, cash, balance, amount);
+    outputFile << amount[0] + amount[1] + amount[2] << endl;
+    outputFile << balance << endl;
+    for (int i = 0; i < 3; i++)
+        outputFile << amount[i] << " ";
+    return 0;
+}
+/*
+10.7. Симпсон Гомер (9)
+Гомер Симпсон пожертвовал N долларов на распространение дисков с фильмами о себе. Имеется 3 вида дисков, которые продаются по ценам C1, C2 и C3  долларов. Требуется купить как можно больше дисков так, чтобы осталась неизрасходованной как можно меньшая сумма денег.
+Ввод из файла INPUT.TXT. В первой строке задается значение N (1 ≤ N ≤ 2×109). Во второй строке C1, C2 и C3 через пробел (1 ≤ C1, C2 , C3 ≤ 2×109). Все числа целые.
+Вывод в файл OUTPUT.TXT. В первой строке вывести общее количество покупаемых дисков. Во второй строке выводится остаток средств. В третьей строке через пробел выводится число покупаемых  дисков каждого вида соответственно.
+Пример
+Ввод
+14
+5 3 7
+Вывод
+4
+0
+1 3 0
+*/

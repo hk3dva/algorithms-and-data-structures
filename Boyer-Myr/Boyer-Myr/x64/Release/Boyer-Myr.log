@@ -1,0 +1,10 @@
+﻿  Boyer-Myrcpp.cpp
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(32,24): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(37,27): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(46,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  1 of 367 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  Boyer-Myr.vcxproj -> D:\alg\Boyer-Myr\x64\Release\Boyer-Myr.exe

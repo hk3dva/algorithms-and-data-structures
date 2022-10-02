@@ -1,0 +1,16 @@
+﻿  Homer_Simpson.cpp
+D:\alg\Homer_Simpson\Homer_Simpson\Homer_Simpson.cpp(45,17): warning C4244: инициализация: преобразование "__int64" в "int", возможна потеря данных
+D:\alg\Homer_Simpson\Homer_Simpson\Homer_Simpson.cpp(46,17): warning C4244: инициализация: преобразование "__int64" в "int", возможна потеря данных
+D:\alg\Homer_Simpson\Homer_Simpson\Homer_Simpson.cpp(53,19): warning C4244: =: преобразование "__int64" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+D:\alg\Homer_Simpson\Homer_Simpson\Homer_Simpson.cpp(59,52): warning C4244: =: преобразование "__int64" в "int", возможна потеря данных
+D:\alg\Homer_Simpson\Homer_Simpson\Homer_Simpson.cpp(60,56): warning C4244: =: преобразование "__int64" в "int", возможна потеря данных
+  Создание кода
+  2 of 237 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  Homer_Simpson.vcxproj -> D:\alg\Homer_Simpson\x64\Release\Homer_Simpson.exe

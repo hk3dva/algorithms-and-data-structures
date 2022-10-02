@@ -1,0 +1,12 @@
+﻿  liveInMars.cpp
+D:\alg\liveInMars\liveInMars\liveInMars.cpp(130,14): warning C4244: аргумент: преобразование "double" в "unsigned __int64", возможна потеря данных
+D:\alg\liveInMars\liveInMars\liveInMars.cpp(131,14): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+D:\alg\liveInMars\liveInMars\liveInMars.cpp(140,15): warning C4244: аргумент: преобразование "double" в "unsigned __int64", возможна потеря данных
+D:\alg\liveInMars\liveInMars\liveInMars.cpp(141,15): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+D:\alg\liveInMars\liveInMars\liveInMars.cpp(149,28): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  Создание кода
+  3 of 546 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  liveInMars.vcxproj -> D:\alg\liveInMars\x64\Release\liveInMars.exe

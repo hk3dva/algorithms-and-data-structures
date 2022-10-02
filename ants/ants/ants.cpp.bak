@@ -1,0 +1,177 @@
+﻿#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+const int EPS = 0.00001;
+
+struct Point
+{
+    int numb;
+    int x;
+    int y;
+};
+
+bool FileCor(std::ifstream& inpFile, std::ofstream& outFile) //проверка дял фалов
+{
+    if (!inpFile.is_open())
+    {
+        std::cout << "Failed to open Input file \n";
+        return false;
+    }
+    if (inpFile.bad())
+    {
+        std::cout << "Failed to read data from input file \n";
+        return false;
+    }
+    if (!outFile.flush())
+    {
+        std::cout << "Failed to write data to output file\n";
+        return false;
+    }
+    if (!outFile.is_open())
+    {
+        std::cout << "Failed to open outputfile \n";
+        return false;
+    }
+    return true;
+}
+
+double len2(Point a)
+{
+    return a.x * a.x + a.y * a.y;
+}
+double PolarAngle(Point p)
+{
+    return atan2(1.0 * p.y, 1.0 * p.x);
+}
+
+int PolAngleSort(Point a, Point b)
+{
+    if (fabs(PolarAngle(a) - PolarAngle(b)) < EPS)
+        return len2(a) < len2(b);
+    return PolarAngle(a) < PolarAngle(b);
+}
+
+bool PushMass(std::ifstream& inpFile, vector <Point>& mass, int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        int x{};
+        int y{};
+        inpFile >> x >> y;
+        if ((x < -10000 || x > 10000) && (y < -10000 || y > 10000))
+        {
+            cout << x << " " << y << ": Число не входит в границы -10000 <= x, y <= 10000" << endl;
+            return false;
+        }
+        mass.push_back({ i + 1, x, y });
+    }
+    return true;
+}
+void bubbleSort(vector <Point>& tree, vector <Point>& ant)
+{
+    Point tt;
+    for (int i = 0; i < tree.size() - 1; i++)
+        for (int j = 0; j < tree.size() - i - 1; j++)
+            if (ant[j].numb > ant[j + 1].numb)
+            {
+                tt = ant[j];
+                ant[j] = ant[j + 1];
+                ant[j + 1] = tt;
+                tt = tree[j];
+                tree[j] = tree[j + 1];
+                tree[j + 1] = tt;
+            }
+}
+
+void MoveAll(vector <Point>& coord, Point were)
+{
+    for (int i = 0; i < coord.size(); i++)
+    {
+        coord[i].x -= were.x;
+        coord[i].y -= were.y;
+    }
+}
+bool RealLess(int a, int b)
+{
+    return b - a > EPS;
+}
+int main(int argc, char* argv[])
+{
+    setlocale(LC_ALL, "rus");
+    if (argc != 3)
+    {
+        cout << "Неверное количество аргуметнов \n"
+            << "Чтобы использовать: ants.exe <Input file> <Output file>" << endl;
+        return 1;
+    }
+
+    ifstream inputFile;
+    inputFile.open(argv[1]);
+
+    std::ofstream outputFile;
+    outputFile.open(argv[2]);
+
+    if (!FileCor(inputFile, outputFile))
+        return 1;
+    int N{};
+    inputFile >> N;
+    if (N < 1 || N > 100)
+    {
+        cout << "N не входит в границы 1 <= N <= 100" << endl;
+        return 1;
+    }
+    vector <Point> anthills{};
+    vector <Point> trees{};
+    if (!PushMass(inputFile, anthills, N) || !PushMass(inputFile, trees, N))
+        return 1;
+
+    vector <Point> test{};
+    for (int i = 0; i < N; i++)
+        test.push_back(anthills[i]);
+    for (int i = 0; i < N; i++)
+        test.push_back(trees[i]);
+    sort(test.begin(), test.end(), PolAngleSort);
+    MoveAll(anthills, test[0]);
+    MoveAll(trees, test[0]);
+
+    sort(anthills.begin(), anthills.end(), PolAngleSort);
+    sort(trees.begin(), trees.end(), PolAngleSort);
+    bubbleSort(trees, anthills);
+
+    for (int i = 0; i < N; i++)
+        outputFile << trees[i].numb << endl;
+    return 0;
+}
+
+/*
+7.4. Муравьи (8)
+Юный натуралист Билл изучает муравьев. Его муравьи питаются исключительно яблоками, растущими на диких яблонях. Имеется карта с координатами N муравейников и N яблонь. Муравьи из каждого муравейника добираются до яблони кратчайшим путем по прямой. Требуется так распределить яблони между муравейниками, чтобы
+у каждого муравейника была единственная яблоня;
+каждая яблоня принадлежала только одному муравейнику;
+пути муравьев из разных муравейников к своим яблоням не пересекались.
+Ввод из файла INPUT.TXT. Первая строка единственное целое число N (1 ≤ N ≤ 100). Далее в N строках заданы через пробел координаты Xi, Yi (-10000 ≤ Xi, Yi ≤ 10000) муравейников. В последующих N строках заданы координаты яблонь. Никакие три точки не лежат на одной прямой.
+Вывод в файл OUTPUT.TXT состоит из N строк по одному целому числу в строке. Число в i-й строке определяет номер яблони, предназначенной для i-го муравейника.
+Пример
+Ввод
+5
+-42 58
+44 86
+7 28
+99 34
+-13 -59
+-47 -44
+86 74
+68 -75
+-68 60
+99 -60
+Вывод
+4
+2
+1
+5
+3
+*/

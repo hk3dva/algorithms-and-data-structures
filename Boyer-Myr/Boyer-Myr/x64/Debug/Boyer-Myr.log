@@ -1,0 +1,5 @@
+﻿  Boyer-Myrcpp.cpp
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(19,24): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(24,27): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\alg\Boyer-Myr\Boyer-Myr\Boyer-Myrcpp.cpp(52,29): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+  Boyer-Myr.vcxproj -> D:\alg\Boyer-Myr\x64\Debug\Boyer-Myr.exe
